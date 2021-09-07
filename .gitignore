@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+# Ignoro la carpeta de binarios
+bin/
+
 # Log file
 *.log
 
