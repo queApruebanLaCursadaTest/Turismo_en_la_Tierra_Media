@@ -11,10 +11,10 @@ public class  SecretariaTurismo {
 
 	public static void main(String[] args) {
 		
-		leerPreferenciaUsuarios();
+		leerUsuarios();
 	}
 
-	public static void leerPreferenciaUsuarios() {
+	public static void leerUsuarios() {
 		/*
 		 * Lectura de USUARIOS
 		 */
@@ -40,7 +40,7 @@ public class  SecretariaTurismo {
 					double tiempo 		= Double.parseDouble(datosUsuario[3]);
 					TipoAtraccion atrac = TipoAtraccion.valueOf(datosUsuario[4]);
 					
-					//Se añade el usuario con dichos datos
+					//Se extrae el usuario con dichos datos
 					usuariosSistema.add(new Usuario(dni,nombre,presupuesto,tiempo,atrac));
 					
 				} catch(NumberFormatException e) {
