@@ -20,5 +20,29 @@ public class Atraccion {
 		this.tipoDeAtraccion = tipoDeAtraccion;
 	}
 	
+	public String getNombreAtraccion() {
+		return nombreAtraccion;
+	}
+
+	public void setNombreAtraccion(String nombreAtraccion) {
+		this.nombreAtraccion = nombreAtraccion;
+	}
+
+	public double getCostoAtraccion() {
+		return costoAtraccion;
+	}
+
+	public void setCostoAtraccion(double costoAtraccion) {
+		this.costoAtraccion = costoAtraccion;
+	}
+
+	public TipoAtraccion getTipoDeAtraccion() {
+		return tipoDeAtraccion;
+	}
+
+	public void setTipoDeAtraccion(TipoAtraccion tipoDeAtraccion) {
+		this.tipoDeAtraccion = tipoDeAtraccion;
+	}
+	
 	
 }
