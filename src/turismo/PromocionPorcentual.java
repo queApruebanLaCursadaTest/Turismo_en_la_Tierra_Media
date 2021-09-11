@@ -23,7 +23,7 @@ public class PromocionPorcentual extends Promocion{
 		mensaje += "Costo sin descuento: " + montoTotalSinDto + '\n';
 		mensaje += "Descuento total: " + montoDescuento + '\n';
 		mensaje += "Nuevo costo (c/dto): " + montoTotalConDto + "\n";
-		mensaje += "Porcentaje de descunto: " + porcentajeDescuento + "\n";
+		mensaje += "Porcentaje de descunto: -" + porcentajeDescuento + "%\n";
 		
 		mensaje += "Total atracciones: \n";
 		for(Atraccion i : atraccionesContenidas) {
