@@ -4,8 +4,11 @@ public class Usuario {
 
 	int dni;
 	String nombreDeUsuario;
+
 	double presupuesto;
+
 	double tiempoDisponible;
+
 	Itinerario itinerarioPersonal;
 	TipoAtraccion preferenciaDelUsuario;
 
@@ -21,4 +24,15 @@ public class Usuario {
 		// TODO: intinerarioPersonal ?
 	}
 
+	public String getNombreDeUsuario() {
+		return nombreDeUsuario;
+	}
+
+	public double getPresupuesto() {
+		return presupuesto;
+	}
+
+	public double getTiempoDisponible() {
+		return tiempoDisponible;
+	}
 }

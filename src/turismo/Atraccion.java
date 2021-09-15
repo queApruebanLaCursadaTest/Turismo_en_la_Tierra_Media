@@ -6,18 +6,19 @@ public class Atraccion {
 	double costoAtraccion;
 	double tiempoRequerido;
 	int cupoMaximo;
-	int cupoActual=0;
+	int cupoActual = 0;
 	TipoAtraccion tipoDeAtraccion;
-	
-	public Atraccion(String nombreAtraccion, double costoAtraccion, double tiempoRequerido, int cupoMaximo, TipoAtraccion tipoDeAtraccion) {
-		super();
+
+	public Atraccion(String nombreAtraccion, double costoAtraccion, double tiempoRequerido, int cupoMaximo,
+			TipoAtraccion tipoDeAtraccion) {
+
 		this.nombreAtraccion = nombreAtraccion;
 		this.costoAtraccion = costoAtraccion;
 		this.tiempoRequerido = tiempoRequerido;
 		this.cupoMaximo = cupoMaximo;
 		this.tipoDeAtraccion = tipoDeAtraccion;
 	}
-	
+
 	public String getNombreAtraccion() {
 		return nombreAtraccion;
 	}
@@ -41,6 +42,5 @@ public class Atraccion {
 	public void setTipoDeAtraccion(TipoAtraccion tipoDeAtraccion) {
 		this.tipoDeAtraccion = tipoDeAtraccion;
 	}
-	
-	
+
 }
