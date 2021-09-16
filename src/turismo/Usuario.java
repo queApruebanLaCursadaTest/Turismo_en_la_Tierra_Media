@@ -4,11 +4,8 @@ public class Usuario {
 
 	int dni;
 	String nombreDeUsuario;
-
 	double presupuesto;
-
 	double tiempoDisponible;
-
 	Itinerario itinerarioPersonal;
 	TipoAtraccion preferenciaDelUsuario;
 
@@ -20,10 +17,12 @@ public class Usuario {
 		this.presupuesto = presupuesto;
 		this.tiempoDisponible = tiempoDisponible;
 		this.preferenciaDelUsuario = preferenciaDelUsuario;
-
-		// TODO: intinerarioPersonal ?
 	}
-
+	
+	public boolean aceptarSugerencia(Sugerencia nueva) {
+		return itinerarioPersonal.aceptarSugerencia(nueva); //devuelve true si se añadió
+	}
+	
 	public String getNombreDeUsuario() {
 		return nombreDeUsuario;
 	}
