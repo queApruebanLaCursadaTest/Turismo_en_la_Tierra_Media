@@ -11,6 +11,8 @@ public class Itinerario {
 		this.listadoSugerenciasAceptadas = listadoSugerenciasAceptadas;
 	}
 	
-	
+	public boolean aceptarSugerencia(Sugerencia nueva) {
+		return listadoSugerenciasAceptadas.add(nueva); // devuelve true si se agregó
+	}
 
 }
