@@ -29,6 +29,8 @@ public class Usuario {
 	}
 	
 	public boolean aceptarSugerencia(Sugerencia nueva) {
+		this.presupuesto -= nueva.getCosto();
+		this.tiempoDisponible -= nueva.getTiempoRequerido();
 		return itinerarioPersonal.aceptarSugerencia(nueva); //devuelve true si se añadió
 	}
 	
