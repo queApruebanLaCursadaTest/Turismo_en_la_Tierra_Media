@@ -1,13 +1,15 @@
 package turismo;
 
+import java.util.List;
+
 public class PromocionAxB extends Promocion {
 
-	Atraccion [] atraccionesGratis;
+	private List<Atraccion> atraccionesGratis;
 
-	public PromocionAxB(String nombrePromocion, TipoAtraccion tipoPromocion,
-			Atraccion[] atraccionesContenidas, Atraccion[] atraccionesGratis) throws Exception {
+	public PromocionAxB(TipoAtraccion tipoPromocion, String nombrePromocion,
+			List<Atraccion> atraccionesContenidas, List<Atraccion> atraccionesGratis) {
 		
-		super(nombrePromocion, tipoPromocion, atraccionesContenidas);
+		super(tipoPromocion, nombrePromocion, atraccionesContenidas);
 		this.atraccionesGratis = atraccionesGratis;
 		
 		calcularCostoPromocion();
@@ -19,12 +21,12 @@ public class PromocionAxB extends Promocion {
 		double montoNetoDescuento = 0;
 		double precioConDescuento = 0;
 		
-		for(Atraccion i : atraccionesContenidas) {
-			montoTotal += i.costoAtraccion; //sumo el costo total sin dto.
+		for(Atraccion atraccion : atraccionesContenidas) {
+			montoTotal += atraccion.getCosto(); //sumo el costo total sin dto.
 		}
 		
-		for(Atraccion i : atraccionesGratis) {
-			montoNetoDescuento += i.costoAtraccion; //monto a descontar
+		for(Atraccion atraccion : atraccionesGratis) {
+			montoNetoDescuento += atraccion.getCosto(); //monto a descontar
 		}
 		
 		precioConDescuento = montoTotal - montoNetoDescuento;
@@ -36,19 +38,19 @@ public class PromocionAxB extends Promocion {
 	
 	@Override
 	public String toString() {
-		String mensaje = ">>> Promocion '" + nombrePromocion + "'\n\n";
+		String mensaje = ">>> Promocion '" + super.nombre + "'\n";
 		
-		mensaje += "Costo sin descuento: " + montoTotalSinDto + '\n';
-		mensaje += "Descuento total: " + montoDescuento + '\n';
-		mensaje += "Nuevo costo (c/dto): " + montoTotalConDto + "\n\n";
+		mensaje += "\tCosto sin descuento: " + super.montoTotalSinDto + '\n';
+		mensaje += "\tDescuento total: " + super.montoDescuento + '\n';
+		mensaje += "\tNuevo costo (c/dto): " + super.montoTotalConDto + "\n\n";
 		
-		mensaje += "Atracciones Gratuitas: \n";
-		for(Atraccion i : atraccionesGratis) {
-			mensaje += "\t> " + i.getNombreAtraccion() + " -$" + i.getCostoAtraccion() + '\n';
+		mensaje += "\tAtracciones Gratuitas: \n";
+		for(Atraccion atraccion : this.atraccionesGratis) {
+			mensaje += "\t\t> " + atraccion.getNombre() + " (-$" + atraccion.getCosto()+ ")\n";
 		}
-		mensaje += "Total atracciones: \n";
-		for(Atraccion i : atraccionesContenidas) {
-			mensaje += "\t> " + i.getNombreAtraccion() + '\n';
+		mensaje += "\tTotal atracciones: \n";
+		for(Atraccion atraccion : super.atraccionesContenidas) {
+			mensaje += "\t\t> " + atraccion.getNombre() + '\n';
 		}
 		return mensaje;
 	}

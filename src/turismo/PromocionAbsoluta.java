@@ -1,32 +1,35 @@
 package turismo;
 
+import java.util.List;
+
 public class PromocionAbsoluta extends Promocion{
 
-	double descuentoTotal;
+	private double descuentoTotal;
 
-	public PromocionAbsoluta(String nombrePromocion, TipoAtraccion tipoPromocion,
-			Atraccion[] atraccionesContenidas, double descuentoTotal) throws Exception {
-		super(nombrePromocion, tipoPromocion, atraccionesContenidas);
+	public PromocionAbsoluta(TipoAtraccion tipoPromocion, String nombrePromocion,
+			List<Atraccion> atraccionesContenidas, double descuentoTotal) {
+		super(tipoPromocion, nombrePromocion, atraccionesContenidas);
 		this.descuentoTotal = descuentoTotal;
+		calcularCostoPromocion();
 	}
 
 	@Override
 	public void calcularCostoPromocion() {
-		super.setMontoDescuento(descuentoTotal);
-		super.setMontoTotalConDto(super.montoTotalSinDto - descuentoTotal);
+		super.setMontoDescuento(this.descuentoTotal);
+		super.setMontoTotalConDto(super.montoTotalSinDto - this.descuentoTotal);
 	}
 	
 	@Override
 	public String toString() {
-		String mensaje = ">>> Promocion '" + nombrePromocion + "'\n\n";
+		String mensaje = ">>> Promocion '" + nombre + "'\n";
 		
-		mensaje += "Costo sin descuento: " + montoTotalSinDto + '\n';
-		mensaje += "Descuento total: " + montoDescuento + '\n';
-		mensaje += "Nuevo costo (c/dto): " + montoTotalConDto + "\n";
+		mensaje += "\tCosto sin descuento: " + super.montoTotalSinDto + '\n';
+		mensaje += "\tDescuento total: " + super.montoDescuento + '\n';
+		mensaje += "\tNuevo costo (c/dto): " + super.montoTotalConDto + "\n\n";
 		
-		mensaje += "Total atracciones: \n";
-		for(Atraccion i : atraccionesContenidas) {
-			mensaje += "\t> " + i.getNombreAtraccion() + '\n';
+		mensaje += "\tTotal atracciones: \n";
+		for(Atraccion atraccion : atraccionesContenidas) {
+			mensaje += "\t\t> " + atraccion.getNombre() + '\n';
 		}
 		return mensaje;
 	}

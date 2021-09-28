@@ -1,34 +1,37 @@
 package turismo;
 
+import java.util.List;
+
 public class PromocionPorcentual extends Promocion {
 
-	double porcentajeDescuento;
+	private double porcentajeDescuento;
 
-	public PromocionPorcentual(String nombrePromocion, TipoAtraccion tipoPromocion, Atraccion[] atraccionesContenidas,
-			double porcentajeDescuento) throws Exception {
+	public PromocionPorcentual(TipoAtraccion tipoPromocion, String nombrePromocion,
+			List<Atraccion> atraccionesContenidas, double porcentajeDescuento) {
 
-		super(nombrePromocion, tipoPromocion, atraccionesContenidas);
+		super(tipoPromocion, nombrePromocion, atraccionesContenidas);
 		this.porcentajeDescuento = porcentajeDescuento;
+		calcularCostoPromocion();
 	}
 
 	@Override
 	public void calcularCostoPromocion() {
-		setMontoDescuento((montoTotalSinDto / 100) * porcentajeDescuento);
-		setMontoTotalConDto(montoTotalSinDto - montoDescuento);
+		setMontoDescuento((super.montoTotalSinDto / 100) * this.porcentajeDescuento);
+		setMontoTotalConDto(super.montoTotalSinDto - super.montoDescuento);
 	}
 
 	@Override
 	public String toString() {
-		String mensaje = ">>> Promocion '" + nombrePromocion + "'\n\n";
+		String mensaje = ">>> Promocion '" + super.nombre + "'\n";
 
-		mensaje += "Costo sin descuento: " + montoTotalSinDto + '\n';
-		mensaje += "Descuento total: " + montoDescuento + '\n';
-		mensaje += "Nuevo costo (c/dto): " + montoTotalConDto + "\n";
-		mensaje += "Porcentaje de descunto: -" + porcentajeDescuento + "%\n";
+		mensaje += "\tCosto sin descuento: " + super.montoTotalSinDto + '\n';
+		mensaje += "\tDescuento total: " + super.montoDescuento + '\n';
+		mensaje += "\tPorcentaje de descunto: -" + this.porcentajeDescuento + "%\n";
+		mensaje += "\tNuevo costo (c/dto): " + super.montoTotalConDto + "\n\n";
 
-		mensaje += "Total atracciones: \n";
-		for (Atraccion i : atraccionesContenidas) {
-			mensaje += "\t> " + i.getNombreAtraccion() + '\n';
+		mensaje += "\tTotal atracciones: \n";
+		for (Atraccion atraccion : super.atraccionesContenidas) {
+			mensaje += "\t\t> " + atraccion.getNombre() + '\n';
 		}
 		return mensaje;
 	}
