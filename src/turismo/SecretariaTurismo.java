@@ -1,6 +1,7 @@
 package turismo;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,7 +25,7 @@ public class SecretariaTurismo {
 
 		// Preparo para leer desde la consola 
 		Scanner in = new Scanner(System.in);
-		int opcion = 0;
+		String opcion = "";
 		System.out.println("##################################################################################\n"
 						 + "##                             BIENVENIDO A TIERRA MEDIA                        ##\n"
 						 + "##################################################################################");
@@ -40,9 +41,33 @@ public class SecretariaTurismo {
 			sugerencias.addAll(promociones);
 			sugerencias.addAll(atracciones);
 			
+			// Muestro los datos del usuario y las sugerencias que el sistema encontró
 			System.out.println("\nSESION INICIADA POR: \n" + usuario);
 			System.out.println("-----------------------------------------------------------------------------------");
 			usuario.imprimirSugerencias(sugerencias);
+			System.out.println("-----------------------------------------------------------------------------------");
+
+			Iterator<Sugerencia> itr = sugerencias.iterator();
+			
+			do {
+				Sugerencia sugerenciaCursor = itr.next();
+				System.out.println("¿Desea comprar " + sugerenciaCursor.getNombre() + "? (s/n)");
+				opcion = in.next();
+				switch(opcion) {
+					case "s":
+						usuario.aceptarSugerencia(sugerenciaCursor);
+						break;
+						
+					case "n":
+						break;
+					
+					case "q":
+						System.out.println("Usted ha salido.");
+						break;
+				}
+				
+			} while(itr.hasNext() && !opcion.equalsIgnoreCase("q"));
+			
 		}
 		
 	}

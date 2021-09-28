@@ -1,13 +1,13 @@
 package turismo;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Itinerario {
 	
-	List <Sugerencia> listadoSugerenciasAceptadas;
+	List <Sugerencia> listadoSugerenciasAceptadas = new LinkedList<Sugerencia>();
 
 	public Itinerario(List<Sugerencia> listadoSugerenciasAceptadas) {
-		super();
 		this.listadoSugerenciasAceptadas = listadoSugerenciasAceptadas;
 	}
 	
