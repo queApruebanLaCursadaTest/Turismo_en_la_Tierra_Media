@@ -1,46 +1,27 @@
 package turismo;
 
-public class Atraccion {
+public class Atraccion extends Sugerencia {
 
-	String nombreAtraccion;
-	double costoAtraccion;
-	double tiempoRequerido;
-	int cupoMaximo;
-	int cupoActual = 0;
-	TipoAtraccion tipoDeAtraccion;
+	private int cupoMaximo;
+	private int cupoActual = 0;
 
-	public Atraccion(String nombreAtraccion, double costoAtraccion, double tiempoRequerido, int cupoMaximo,
-			TipoAtraccion tipoDeAtraccion) {
-
-		this.nombreAtraccion = nombreAtraccion;
-		this.costoAtraccion = costoAtraccion;
-		this.tiempoRequerido = tiempoRequerido;
+	public Atraccion(TipoAtraccion tipoDeAtraccion, String nombreAtraccion, 
+			double costoAtraccion, double tiempoRequerido, int cupoMaximo) {
+		super(tipoDeAtraccion, nombreAtraccion, costoAtraccion, tiempoRequerido, false);
 		this.cupoMaximo = cupoMaximo;
-		this.tipoDeAtraccion = tipoDeAtraccion;
+		
+//		cupoActual++; 
+//		
+//		if(cupoActual > cupoMaximo) {
+//			throw new Error("No hay suficientes cupos");
+//		}
 	}
+	
 
-	public String getNombreAtraccion() {
-		return nombreAtraccion;
-	}
-
-	public void setNombreAtraccion(String nombreAtraccion) {
-		this.nombreAtraccion = nombreAtraccion;
-	}
-
-	public double getCostoAtraccion() {
-		return costoAtraccion;
-	}
-
-	public void setCostoAtraccion(double costoAtraccion) {
-		this.costoAtraccion = costoAtraccion;
-	}
-
-	public TipoAtraccion getTipoDeAtraccion() {
-		return tipoDeAtraccion;
-	}
-
-	public void setTipoDeAtraccion(TipoAtraccion tipoDeAtraccion) {
-		this.tipoDeAtraccion = tipoDeAtraccion;
-	}
+	@Override
+	public String toString() {
+		return "Atraccion ( " + super.getNombre() + ", Precio : " + super.getCosto() + ", Duracion : " + super.getTiempoRequerido()+ ", Cupos Restantes: " + cupoActual
+				+ ", Tipo : " + super.getTipo() + ") ";
+	}	
 
 }

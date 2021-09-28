@@ -1,45 +1,48 @@
 package turismo;
 
-public abstract class Promocion {
+import java.util.List;
 
-	String nombrePromocion;
+public abstract class Promocion extends Sugerencia {
 
-	double montoDescuento; // Cantidad de dinero descontado
-	double montoTotalConDto; // Total a pagar con el descuento
-	double montoTotalSinDto; // Total a pagar sin el descuento. Coresponde al total de atracciones del pack
+	protected double montoDescuento; // Cantidad de dinero descontado
+	protected double montoTotalConDto; // Total a pagar con el descuento
+	protected double montoTotalSinDto; // Total a pagar sin el descuento. Coresponde al total de atracciones del pack
 								// sin la promo
 
-	TipoAtraccion tipoPromocion;
-	Atraccion[] atraccionesContenidas;
+	List<Atraccion> atraccionesContenidas;
+	double tiempoRequeridoPromocion;
 
-	public Promocion(String nombrePromocion, TipoAtraccion tipoPromocion, Atraccion[] atraccionesContenidas)
-			throws Exception {
-
-		this.nombrePromocion = nombrePromocion;
-		this.tipoPromocion = tipoPromocion;
-		setAtraccionesContenidas(atraccionesContenidas);
+	public Promocion(TipoAtraccion tipoDePromocion, String nombrePromocion,
+			List<Atraccion> atraccionesContenidas) {
+		super(tipoDePromocion, nombrePromocion, true);
+		this.atraccionesContenidas = atraccionesContenidas;
+		setTiempoRequeridoPromocion();
 		calulcarCostoTotalSinPromo();
-	}
+		}
+	
 
 	public abstract void calcularCostoPromocion();
 
 	protected void calulcarCostoTotalSinPromo() {
 		// Obtiene el costo de todas las atracciones contenidas dentro del pack sin
 		// aplicar promo
-		for (Atraccion i : atraccionesContenidas) {
-			montoTotalSinDto += i.getCostoAtraccion();
+		for (Atraccion atraccion : atraccionesContenidas) {
+			montoTotalSinDto += atraccion.getCosto();
 		}
 	}
-
-	public void setAtraccionesContenidas(Atraccion[] contenidas) throws Exception {
-		for (Atraccion i : contenidas) {
-			if (i.getTipoDeAtraccion() != this.tipoPromocion) {
-				throw new Exception("Error, las atracciones deben ser del mismo tipo "
-						+ "estipulado al momento de crear la promocion");
-			}
+	
+	private void setTiempoRequeridoPromocion() {
+		double sumaTiempos = 0;
+		for(Atraccion atraccion : atraccionesContenidas) {
+			sumaTiempos += atraccion.getTiempoRequerido();
 		}
+		this.tiempoRequeridoPromocion = sumaTiempos;
 	}
-
+	
+	public double getTiempoRequeridoPromocion() {
+		return tiempoRequeridoPromocion;
+	}
+	
 	public double getMontoDescuento() {
 		return montoDescuento;
 	}
@@ -54,6 +57,7 @@ public abstract class Promocion {
 
 	public void setMontoTotalConDto(double montoTotalConDto) {
 		this.montoTotalConDto = montoTotalConDto;
+		super.setCosto(montoTotalConDto);
 	}
 
 }
