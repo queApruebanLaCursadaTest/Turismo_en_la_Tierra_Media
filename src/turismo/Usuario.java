@@ -29,9 +29,20 @@ public class Usuario {
 	}
 	
 	public boolean aceptarSugerencia(Sugerencia nueva) {
-		this.presupuesto -= nueva.getCosto();
-		this.tiempoDisponible -= nueva.getTiempoRequerido();
-		return itinerarioPersonal.aceptarSugerencia(nueva); //devuelve true si se añadió
+		boolean agregada = false;
+		if(puedoAceptar(nueva)) {
+			this.presupuesto -= nueva.getCosto();
+			this.tiempoDisponible -= nueva.getTiempoRequerido();
+			
+			agregada = itinerarioPersonal.aceptarSugerencia(nueva);
+		}
+		
+		return agregada;
+	}
+	
+	private boolean puedoAceptar(Sugerencia sugerencia) {
+		return this.tiempoDisponible >= sugerencia.getTiempoRequerido()
+				&& this.presupuesto >= sugerencia.getCosto();
 	}
 	
 	public String getNombreDeUsuario() {
