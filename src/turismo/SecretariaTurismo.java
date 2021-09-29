@@ -25,7 +25,8 @@ public class SecretariaTurismo {
 
 		// Preparo para leer desde la consola 
 		Scanner in = new Scanner(System.in);
-		String opcion = "";
+		String opcion = null;
+		String mensaje = null;
 		System.out.println("##################################################################################\n"
 						 + "##                             BIENVENIDO A TIERRA MEDIA                        ##\n"
 						 + "##################################################################################");
@@ -48,26 +49,41 @@ public class SecretariaTurismo {
 			System.out.println("-----------------------------------------------------------------------------------");
 
 			Iterator<Sugerencia> itr = sugerencias.iterator();
-			
 			do {
 				Sugerencia sugerenciaCursor = itr.next();
-				System.out.println("¿Desea comprar " + sugerenciaCursor.getNombre() + "? (s/n)");
+				System.out.println("[ Dinero en la cuenta: " + usuario.getPresupuesto() + ", Tiempo Max. Programado: (min) " + usuario.getTiempoDisponible() + " ]\n");
+				System.out.println("¿Desea comprar " + sugerenciaCursor.getNombre() + "?\n"
+						+ "[s] - si \t [n] - no \t [q] - salir");
 				opcion = in.next();
 				switch(opcion) {
 					case "s":
-						usuario.aceptarSugerencia(sugerenciaCursor);
+						if(usuario.aceptarSugerencia(sugerenciaCursor)) 
+							mensaje = "##################################################################################\n"
+									 + "##                         ¡Compra realizada con exito!                        ##\n"
+									 + "##################################################################################";
+						else 
+							 mensaje = "##################################################################################\n"
+									 + "##                Lo sentimos, no se pudo efectual la compra                    ##\n"
+									 + "##################################################################################";
+						
 						break;
 						
 					case "n":
+						mensaje =  "##################################################################################\n"
+								 + "##            Sugerencia no aceptada. Pasando a la siguiente opcion...          ##\n"
+								 + "##################################################################################";;
 						break;
 					
 					case "q":
-						System.out.println("Usted ha salido.");
+						mensaje =  "##################################################################################\n"
+								 + "##                         Usted ha salido. Hasta luego!                        ##\n"
+								 + "##################################################################################";;
 						break;
 				}
 				
+				System.out.println(mensaje);
+				System.out.println("-----------------------------------------------------------------------------------");
 			} while(itr.hasNext() && !opcion.equalsIgnoreCase("q"));
-			
 		}
 		
 	}
