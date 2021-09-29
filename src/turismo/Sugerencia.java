@@ -39,6 +39,10 @@ public abstract class Sugerencia {
 		return tiempoRequerido;
 	}
 
+	public void setTiempoRequerido(double tiempoRequerido) {
+		this.tiempoRequerido = tiempoRequerido;
+	}
+
 	public boolean esPromocion() {
 		return promocion;
 	}
