@@ -19,6 +19,7 @@ public class Usuario {
 		this.presupuesto = presupuesto;
 		this.tiempoDisponible = tiempoDisponible;
 		this.preferenciaDelUsuario = preferenciaDelUsuario;
+		this.itinerarioPersonal = new Itinerario();
 	}
 	
 	public void imprimirSugerencias(List<Sugerencia> sugerencias) {
@@ -58,7 +59,7 @@ public class Usuario {
 		String msg = "\t> Nombre: " + nombreDeUsuario + "\n"
 				+ "\t> Atraccion Preferida: " + preferenciaDelUsuario + "\n"
 				+ "\t> Monedas: " + presupuesto + "\n"
-				+ "\t> Tiempo: " + tiempoDisponible;
+				+ "\t> Tiempo (min): " + tiempoDisponible;
 		return msg;
 	}
 
