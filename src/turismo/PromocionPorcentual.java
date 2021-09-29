@@ -33,6 +33,7 @@ public class PromocionPorcentual extends Promocion {
 		for (Atraccion atraccion : super.atraccionesContenidas) {
 			mensaje += "\t\t> " + atraccion.getNombre() + '\n';
 		}
+		mensaje += "\n\tTiempo Requerido (min): " + super.tiempoRequerido + "\n";
 		return mensaje;
 	}
 

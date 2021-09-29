@@ -31,6 +31,8 @@ public class PromocionAbsoluta extends Promocion{
 		for(Atraccion atraccion : atraccionesContenidas) {
 			mensaje += "\t\t> " + atraccion.getNombre() + '\n';
 		}
+		mensaje += "\n\tTiempo Requerido (min): " + super.tiempoRequerido + "\n";
+
 		return mensaje;
 	}
 }
