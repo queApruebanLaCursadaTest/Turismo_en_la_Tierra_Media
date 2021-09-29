@@ -2,88 +2,55 @@ package turismo;
 
 public abstract class Sugerencia {
 
-	double tiempoDeLaOferta;
-	double precioDeLaOferta;
-	//Atraccion atraccionSugerida;
-	TipoAtraccion atraccionSugerida;
-	Promocion promocionSugerida;
+	protected TipoAtraccion tipo;
+	protected String nombre;
+	protected double costo;
+	protected double tiempoRequerido;
+	protected boolean promocion;
 	
-	/*
-	 * NOTA: 
-	 * 
-	 * Si se lo piensa bien, la clase Sugerencia no tendría que tener los
-	 * atributos 
-	 * 		double tiempoDeLaOferta 
-	 * 		double precioDeLaOferta 
-	 * 		TipoAtraccion atraccionSugerida 
-	 * dado que éstos son atributos que se pueden obtener de la Atraccion misma que contiene la sugerencia
-	 * 
-	 * 
-	 * Y como una Sugerencia puede ser tanto Promocion o Atraccion individual, se
-	 * harían solo los dos contructores de manera más simple.
-	 * 
-	 * Quedaría: 
-	 * 		> atributos: 
-	 * 			Atraccion atraccionSugerida; 
-	 * 			Promocion promocionSugerida; 
-	 * 
-	 * 		> constructores:
-	 * 			public Sugerencia(Atraccion atraccionSugerida) { 
-	 * 				this.atraccionSugerida = atraccionSugerida; 
-	 * 			}
-	 * 
-	 * 			public Sugerencia(Promocion promocionSugerida) { 
-	 * 				this.promocionSugerida = promocionSugerida; 
-	 * 			}
-	 */
+	public Sugerencia(TipoAtraccion tipo, String nombre, Double costo, 
+			Double tiempoRequerido, boolean promocion) {
+		this.tipo = tipo;
+		this.nombre = nombre;
+		this.costo = costo;
+		this.tiempoRequerido = tiempoRequerido;
+		this.promocion = promocion;
+	}
 	
-	//TODO: MODIFICAR (ver NOTA mas arriba)
-	public Sugerencia(double tiempoDeLaOferta, double precioDeLaOferta, Promocion promocionSugerida) {
-		this.tiempoDeLaOferta = tiempoDeLaOferta;
-		this.precioDeLaOferta = precioDeLaOferta;
-		this.promocionSugerida = promocionSugerida;
+	public Sugerencia(TipoAtraccion tipo, String nombre, boolean promocion) {
+		this.tipo = tipo;
+		this.nombre = nombre;
+		this.promocion = promocion;
 	}
 
-	//TODO: MODIFICAR (ver NOTA mas arriba)
-	  public Sugerencia(double tiempoDeLaOferta, double precioDeLaOferta, TipoAtraccion atraccionSugerida, Promocion promocionSugerida) { 
-		super();
-		this.tiempoDeLaOferta = tiempoDeLaOferta; 
-		this.precioDeLaOferta = precioDeLaOferta; 
-		this.atraccionSugerida = atraccionSugerida;
-		this.promocionSugerida = promocionSugerida; 
-	  }
-	 
-	  //TODO: Borrar getters/setters. Éstos seran accedidos desde las clases Atracciones y Promociones (ver NOTA mas arriba)
-	public double getTiempoDeLaOferta() {
-		return tiempoDeLaOferta;
+	public TipoAtraccion getTipo() {
+		return tipo;
 	}
 
-	public void setTiempoDeLaOferta(double tiempoDeLaOferta) {
-		this.tiempoDeLaOferta = tiempoDeLaOferta;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public double getPrecioDeLaOferta() {
-		return precioDeLaOferta;
+	public double getCosto() {
+		return costo;
 	}
 
-	public void setPrecioDeLaOferta(double precioDeLaOferta) {
-		this.precioDeLaOferta = precioDeLaOferta;
+	public double getTiempoRequerido() {
+		return tiempoRequerido;
 	}
 
-	public TipoAtraccion getAtraccionSugerida() {
-		return atraccionSugerida;
-	}
-
-	public void setAtraccionSugerida(TipoAtraccion atraccionSugerida) {
-		this.atraccionSugerida = atraccionSugerida;
-	}
-
-	public Promocion getPromocionSugerida() {
-		return promocionSugerida;
+	public void setTiempoRequerido(double tiempoRequerido) {
+		this.tiempoRequerido = tiempoRequerido;
 	}
 
 	public boolean esPromocion() {
-		return this.promocionSugerida != null;
+		return promocion;
 	}
+
+	public void setCosto(double costo) {
+		this.costo = costo;
+	}
+	
+
 
 }

@@ -4,6 +4,9 @@
 # Ignoro la carpeta de binarios
 bin/
 
+# Ignoro archivos de salida
+archivos-salida/
+
 # Log file
 *.log
 

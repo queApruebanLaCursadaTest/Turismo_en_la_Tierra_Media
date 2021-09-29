@@ -1,108 +1,109 @@
 package turismo;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 public class SecretariaTurismo {
-	private static List<Usuario> usuariosSistema = new ArrayList<Usuario>();
-	private static Atraccion[] Atracciones = new Atraccion[8];
+	private static List<Usuario>    usuarios;
+	private static List<Atraccion>  atracciones;
+	private static List<Promocion>  promociones;
+	private static List<Sugerencia> sugerencias;
+	
+	public static void main(String[] args) throws Exception {
+		
+		usuarios 	= new LinkedList<Usuario>();
+		promociones = new LinkedList<Promocion>();
+		atracciones = new LinkedList<Atraccion>();
+		
+		// Levanto los datos desde los archivos
+		usuarios    = AdministradorArchivos.leerUsuarios();
+		atracciones = AdministradorArchivos.leerAtracciones();
+		promociones = AdministradorArchivos.leerPromociones();
 
-	public static void main(String[] args) {
+		// Preparo para leer desde la consola 
+		Scanner in = new Scanner(System.in);
+		String opcion = null;
+		String mensaje = null;
+		System.out.println("##################################################################################\n"
+						 + "##                             BIENVENIDO A TIERRA MEDIA                        ##\n"
+						 + "##################################################################################");
+		
+		for(Usuario usuario : usuarios) {
+			// Ordeno segun las preferencias del usuario
+			Collections.sort(atracciones, new ComparadorDeSugerencias(usuario.getPreferenciaDelUsuario()));
+			Collections.sort(promociones, new ComparadorDeSugerencias(usuario.getPreferenciaDelUsuario()));
 
-		leerUsuarios();
-		leerAtracciones(Atracciones);
+			
+			sugerencias = new LinkedList<Sugerencia>();
+			// Añado todo a las sugerencias
+			sugerencias.addAll(promociones);
+			sugerencias.addAll(atracciones);
+			
+			// Muestro los datos del usuario y las sugerencias que el sistema encontró
+			System.out.println("\nSESION INICIADA POR: \n" + usuario);
+			System.out.println("-----------------------------------------------------------------------------------");
+			usuario.imprimirSugerencias(sugerencias);
+			System.out.println("-----------------------------------------------------------------------------------");
+
+			Iterator<Sugerencia> itr = sugerencias.iterator();
+			do {
+				Sugerencia sugerenciaCursor = itr.next();
+				System.out.println("[ Dinero en la cuenta: " + usuario.getPresupuesto() + ", Tiempo Max. Programado: (min) " + usuario.getTiempoDisponible() + " ]\n");
+				System.out.println("¿Desea comprar " + sugerenciaCursor.getNombre() + "?\n"
+						+ "[s] - si \t [n] - no \t [q] - salir");
+				opcion = in.next();
+				switch(opcion) {
+					case "s":
+						if(usuario.aceptarSugerencia(sugerenciaCursor)) 
+							mensaje = "##################################################################################\n"
+									 + "##                         ¡Compra realizada con exito!                        ##\n"
+									 + "##################################################################################";
+						else 
+							 mensaje = "##################################################################################\n"
+									 + "##                Lo sentimos, no se pudo efectual la compra                    ##\n"
+									 + "##################################################################################";
+						
+						break;
+						
+					case "n":
+						mensaje =  "##################################################################################\n"
+								 + "##            Sugerencia no aceptada. Pasando a la siguiente opcion...          ##\n"
+								 + "##################################################################################";;
+						break;
+					
+					case "q":
+						mensaje =  "##################################################################################\n"
+								 + "##                         Usted ha salido. Hasta luego!                        ##\n"
+								 + "##################################################################################";;
+						break;
+				}
+				
+				System.out.println(mensaje);
+				System.out.println("-----------------------------------------------------------------------------------");
+			} while(itr.hasNext() && !opcion.equalsIgnoreCase("q"));
+			AdministradorArchivos.escribirUsuario(usuario);
+		}
+		System.out.println("------------------ Atencion: No hay mas usuarios en el sistema. Fin del proceso ------------------");
+		in.close();
 	}
-
-	public static void leerUsuarios() {
+	
+	public static List<Atraccion> traerAtracciones(String[] nombres){
 		/*
-		 * Lectura de USUARIOS
+		 * Dado un array de nombres, devuelve una lista con las atracciones y todos sus atributos
 		 */
-
-		FileReader fr = null;
-		BufferedReader br = null;
-
-		try {
-			fr = new FileReader("preferenciaUsuario.txt");
-			br = new BufferedReader(fr);
-
-			// lectura del fichero
-			String linea = br.readLine();
-
-			while (linea != null) {
-				try {
-					String[] datosUsuario = linea.split(";"); // Separo los datos
-
-					// Se parsean los datos del archivo
-					int dni = Integer.parseInt(datosUsuario[0]);
-					String nombre = datosUsuario[1];
-					double presupuesto = Double.parseDouble(datosUsuario[2]);
-					double tiempo = Double.parseDouble(datosUsuario[3]);
-					TipoAtraccion atrac = TipoAtraccion.valueOf(datosUsuario[4]);
-
-					// Se extrae el usuario con dichos datos
-					usuariosSistema.add(new Usuario(dni, nombre, presupuesto, tiempo, atrac));
-
-				} catch (NumberFormatException e) {
-					System.err.println("Uno o mÃ¡s valores no se han podido leer");
-
-				} catch (IllegalArgumentException e) {
-					System.err.println("No se ha podido leer la ateccion preferida"); // Cuando falla enum.valueOf()
-
-				} finally {
-					linea = br.readLine();// Continua la lectura del archivo
+		List<Atraccion> atrac =  new LinkedList<Atraccion>();
+		
+		for (int i = 0; i < nombres.length; i++) {
+			for(int j = 0; j < atracciones.size(); j++) {
+				if(atracciones.get(j).getNombre().contains(nombres[i])) {
+					atrac.add(atracciones.get(j));
 				}
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
-	}
-
-	public static void leerAtracciones(Atraccion[] atracciones) {
-		/*
-		 * Lectura de Atracciones
-		 */
-
-		FileReader fr = null;
-		BufferedReader br = null;
-		int contador = 0;
-
-		try {
-			fr = new FileReader("archivoAtracciones.txt");
-			br = new BufferedReader(fr);
-
-			// lectura del fichero
-			String linea = br.readLine();
-
-			while (linea != null) {
-				try {
-					String[] datosUsuario = linea.split(";"); // Separo los datos
-
-					// Se parsean los datos del archivo
-					String nombre = datosUsuario[0];
-					double costo = Double.parseDouble(datosUsuario[1]);
-					double tiempo = Double.parseDouble(datosUsuario[2]);
-					int cupo = (int) Double.parseDouble(datosUsuario[3]);
-					TipoAtraccion atrac = TipoAtraccion.valueOf(datosUsuario[4]);
-					// Se agregan las atracciones con dichos datos
-					atracciones[contador] = new Atraccion(nombre, costo, tiempo, cupo, atrac);
-					contador += 1;
-
-				} catch (NumberFormatException e) {
-					System.err.println("Uno o mas valores no se han podido leer");
-
-				} catch (IllegalArgumentException e) {
-					System.err.println("No se ha podido leer el tipo de atraccion preferida"); // Cuando falla
-																								// enum.valueOf()
-
-				} finally {
-					linea = br.readLine();// Continua la lectura del archivo
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+		return atrac;
 	}
 }
