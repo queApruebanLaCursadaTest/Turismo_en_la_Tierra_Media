@@ -11,4 +11,9 @@ public class Itinerario {
 		return listadoSugerenciasAceptadas.add(nueva); // devuelve true si se agregó
 	}
 
+	public List<Sugerencia> getListadoSugerenciasAceptadas() {
+		return listadoSugerenciasAceptadas;
+	}
+	
+
 }
