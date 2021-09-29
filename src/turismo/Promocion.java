@@ -10,13 +10,12 @@ public abstract class Promocion extends Sugerencia {
 								// sin la promo
 
 	List<Atraccion> atraccionesContenidas;
-	double tiempoRequeridoPromocion;
 
 	public Promocion(TipoAtraccion tipoDePromocion, String nombrePromocion,
 			List<Atraccion> atraccionesContenidas) {
 		super(tipoDePromocion, nombrePromocion, true);
 		this.atraccionesContenidas = atraccionesContenidas;
-		setTiempoRequeridoPromocion();
+		calcularTiempoRequeridoPromocion();
 		calulcarCostoTotalSinPromo();
 		}
 	
@@ -31,16 +30,13 @@ public abstract class Promocion extends Sugerencia {
 		}
 	}
 	
-	private void setTiempoRequeridoPromocion() {
-		double sumaTiempos = 0;
+	private void calcularTiempoRequeridoPromocion() {
+		double suma = 0;
 		for(Atraccion atraccion : atraccionesContenidas) {
-			sumaTiempos += atraccion.getTiempoRequerido();
+			suma += atraccion.getTiempoRequerido();
 		}
-		this.tiempoRequeridoPromocion = sumaTiempos;
-	}
-	
-	public double getTiempoRequeridoPromocion() {
-		return tiempoRequeridoPromocion;
+		
+		super.setTiempoRequerido(suma);
 	}
 	
 	public double getMontoDescuento() {
