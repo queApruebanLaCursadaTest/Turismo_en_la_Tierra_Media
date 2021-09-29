@@ -2,7 +2,9 @@ package turismo;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -160,5 +162,10 @@ public class AdministradorArchivos {
 		return promociones;
 	}
 	
+	public static void escribirUsuario(Usuario usuario) throws IOException {
+		PrintWriter salida = new PrintWriter(new FileWriter("archivos-salida/"+usuario.getNombreDeUsuario()+".txt"));
+		salida.println("Archivo de salida.\n"+usuario.toString()+"\n"+usuario.getItinerarioPersonal().toString());
+		salida.close();
+	}
 
 }
