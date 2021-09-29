@@ -70,4 +70,8 @@ public class Usuario {
 	public double getTiempoDisponible() {
 		return tiempoDisponible;
 	}
+
+	public Itinerario getItinerarioPersonal() {
+		return itinerarioPersonal;
+	}
 }
