@@ -1,0 +1,9 @@
+Archivo de salida.
+	> Nombre: Dante Mogni
+	> Atraccion Preferida: AVENTURA
+	> Monedas: 5000.0
+	> Tiempo (min): 90.0
+Itinerario
+	> Nombre: Pack Aventura, 	> Costo: 0.0, 	> Tiempo: 0.0, 	> Tipo: AVENTURA
+	> Nombre: Pack Paisaje, 	> Costo: 0.0, 	> Tiempo: 0.0, 	> Tipo: PAISAJE
+
