@@ -7,16 +7,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SecretariaTurismo {
-	private static List<Usuario>    usuarios;
-	private static List<Atraccion>  atracciones;
-	private static List<Promocion>  promociones;
-	private static List<Sugerencia> sugerencias;
+	private static List<Usuario>    usuarios 	= new LinkedList<Usuario>();
+	private static List<Atraccion>  atracciones = new LinkedList<Atraccion>(); 
+	private static List<Promocion>  promociones = new LinkedList<Promocion>();
+	private static List<Sugerencia> sugerencias = new LinkedList<Sugerencia>();
 	
 	public static void main(String[] args) throws Exception {
-		
-		usuarios 	= new LinkedList<Usuario>();
-		promociones = new LinkedList<Promocion>();
-		atracciones = new LinkedList<Atraccion>();
 		
 		// Levanto los datos desde los archivos
 		usuarios    = AdministradorArchivos.leerUsuarios();
@@ -36,8 +32,6 @@ public class SecretariaTurismo {
 			Collections.sort(atracciones, new ComparadorDeSugerencias(usuario.getPreferenciaDelUsuario()));
 			Collections.sort(promociones, new ComparadorDeSugerencias(usuario.getPreferenciaDelUsuario()));
 
-			
-			sugerencias = new LinkedList<Sugerencia>();
 			// Añado todo a las sugerencias
 			sugerencias.addAll(promociones);
 			sugerencias.addAll(atracciones);

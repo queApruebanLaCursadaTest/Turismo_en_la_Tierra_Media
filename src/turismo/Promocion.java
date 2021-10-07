@@ -1,6 +1,7 @@
 package turismo;
 
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Promocion extends Sugerencia {
 
@@ -9,7 +10,7 @@ public abstract class Promocion extends Sugerencia {
 	protected double montoTotalSinDto; // Total a pagar sin el descuento. Coresponde al total de atracciones del pack
 								// sin la promo
 
-	List<Atraccion> atraccionesContenidas;
+	protected List<Atraccion> atraccionesContenidas;
 
 	public Promocion(TipoAtraccion tipoDePromocion, String nombrePromocion,
 			List<Atraccion> atraccionesContenidas) {
@@ -54,6 +55,28 @@ public abstract class Promocion extends Sugerencia {
 	public void setMontoTotalConDto(double montoTotalConDto) {
 		this.montoTotalConDto = montoTotalConDto;
 		super.setCosto(montoTotalConDto);
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(atraccionesContenidas);
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Promocion other = (Promocion) obj;
+		return Objects.equals(atraccionesContenidas, other.atraccionesContenidas);
 	}
 
 }

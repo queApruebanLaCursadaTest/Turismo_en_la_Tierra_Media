@@ -1,5 +1,7 @@
 package turismo;
 
+import java.util.Objects;
+
 public abstract class Sugerencia {
 
 	protected TipoAtraccion tipo;
@@ -49,6 +51,26 @@ public abstract class Sugerencia {
 
 	public void setCosto(double costo) {
 		this.costo = costo;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(costo, nombre, promocion, tiempoRequerido, tipo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sugerencia other = (Sugerencia) obj;
+		return Double.doubleToLongBits(costo) == Double.doubleToLongBits(other.costo)
+				&& Objects.equals(nombre, other.nombre) && promocion == other.promocion
+				&& Double.doubleToLongBits(tiempoRequerido) == Double.doubleToLongBits(other.tiempoRequerido)
+				&& tipo == other.tipo;
 	}
 	
 

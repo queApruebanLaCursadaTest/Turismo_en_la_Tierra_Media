@@ -1,6 +1,7 @@
 package turismo;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Usuario {
 
@@ -73,5 +74,25 @@ public class Usuario {
 
 	public Itinerario getItinerarioPersonal() {
 		return itinerarioPersonal;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(dni, nombreDeUsuario, preferenciaDelUsuario, presupuesto, tiempoDisponible);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return dni == other.dni && Objects.equals(nombreDeUsuario, other.nombreDeUsuario)
+				&& preferenciaDelUsuario == other.preferenciaDelUsuario
+				&& Double.doubleToLongBits(presupuesto) == Double.doubleToLongBits(other.presupuesto)
+				&& Double.doubleToLongBits(tiempoDisponible) == Double.doubleToLongBits(other.tiempoDisponible);
 	}
 }
