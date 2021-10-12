@@ -1,7 +1,6 @@
 package turismo;
 
 import java.util.List;
-import java.util.Objects;
 
 public class PromocionAbsoluta extends Promocion{
 
