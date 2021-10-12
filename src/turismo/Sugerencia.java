@@ -56,6 +56,10 @@ public abstract class Sugerencia {
 	public void setCosto(double costo) {
 		this.costo = costo;
 	}
+	
+	public int getCupoActual() {
+		return cupoActual;
+	}
 
 	@Override
 	public int hashCode() {
@@ -76,7 +80,5 @@ public abstract class Sugerencia {
 				&& Double.doubleToLongBits(tiempoRequerido) == Double.doubleToLongBits(other.tiempoRequerido)
 				&& tipo == other.tipo;
 	}
-	
-
 
 }
