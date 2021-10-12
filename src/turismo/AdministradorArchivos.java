@@ -76,6 +76,7 @@ public class AdministradorArchivos {
 					double tiempo 		= Double.parseDouble(datos[2]);
 					int cupo 			= Integer.parseInt(datos[3]);
 					TipoAtraccion tipo = TipoAtraccion.valueOf(datos[4]);
+					
 					// Se agregan las atracciones con dichos datos
 					atracciones.add(new Atraccion(tipo, nombre, costo, tiempo, cupo));
 					
@@ -118,6 +119,7 @@ public class AdministradorArchivos {
 					String nombrePromo			   = datos[1];
 					TipoAtraccion tipo 		   	   = TipoAtraccion.valueOf(datos[2]);
 					String[] atraccionesContenidas = datos[3].split("-"); 
+					
 					switch(tipoPromo) {
 						case "Absoluta":
 							double dtoTotal = Double.parseDouble(datos[datos.length - 1]);

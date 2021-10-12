@@ -77,7 +77,9 @@ public class SecretariaTurismo {
 				
 				System.out.println(mensaje);
 				System.out.println("-----------------------------------------------------------------------------------");
+			
 			} while(itr.hasNext() && !opcion.equalsIgnoreCase("q"));
+			
 			AdministradorArchivos.escribirUsuario(usuario);
 		}
 		System.out.println("------------------ Atencion: No hay mas usuarios en el sistema. Fin del proceso ------------------");

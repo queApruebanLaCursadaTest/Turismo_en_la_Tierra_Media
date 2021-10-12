@@ -9,6 +9,7 @@ public abstract class Sugerencia {
 	protected double costo;
 	protected double tiempoRequerido;
 	protected boolean promocion;
+	protected int cupoActual = 0;
 	
 	public Sugerencia(TipoAtraccion tipo, String nombre, Double costo, 
 			Double tiempoRequerido, boolean promocion) {
@@ -24,6 +25,9 @@ public abstract class Sugerencia {
 		this.nombre = nombre;
 		this.promocion = promocion;
 	}
+	
+	public abstract void ocuparLugar() throws Exception;
+	public abstract boolean hayCupo();
 
 	public TipoAtraccion getTipo() {
 		return tipo;

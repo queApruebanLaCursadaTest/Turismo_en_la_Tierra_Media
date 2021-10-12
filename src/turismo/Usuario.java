@@ -32,7 +32,8 @@ public class Usuario {
 	
 	public boolean aceptarSugerencia(Sugerencia nueva) {
 		boolean agregada = false;
-		if(puedoAceptar(nueva)) {
+		
+		if (this.puedoAceptar(nueva) && nueva.hayCupo()) {
 			this.presupuesto -= nueva.getCosto();
 			this.tiempoDisponible -= nueva.getTiempoRequerido();
 			
