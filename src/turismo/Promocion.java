@@ -9,7 +9,6 @@ public abstract class Promocion extends Sugerencia {
 	protected double montoTotalConDto; // Total a pagar con el descuento
 	protected double montoTotalSinDto; // Total a pagar sin el descuento. Coresponde al total de atracciones del pack
 								// sin la promo
-
 	protected List<Atraccion> atraccionesContenidas;
 
 	public Promocion(TipoAtraccion tipoDePromocion, String nombrePromocion,
@@ -17,18 +16,20 @@ public abstract class Promocion extends Sugerencia {
 		super(tipoDePromocion, nombrePromocion, true);
 		this.atraccionesContenidas = atraccionesContenidas;
 		calcularTiempoRequeridoPromocion();
-		calulcarCostoTotalSinPromo();
+		this.montoTotalSinDto = calulcarCostoTotalSinPromo();
 		}
 	
 
 	public abstract void calcularCostoPromocion();
 
-	protected void calulcarCostoTotalSinPromo() {
+	protected double calulcarCostoTotalSinPromo() {
 		// Obtiene el costo de todas las atracciones contenidas dentro del pack sin
 		// aplicar promo
-		for (Atraccion atraccion : atraccionesContenidas) {
-			montoTotalSinDto += atraccion.getCosto();
+		double costoSinDto = 0;
+		for (Atraccion atraccion : this.atraccionesContenidas) {
+			costoSinDto += atraccion.getCosto();
 		}
+		return costoSinDto;
 	}
 	
 	private void calcularTiempoRequeridoPromocion() {
@@ -75,6 +76,11 @@ public abstract class Promocion extends Sugerencia {
 	public void setMontoTotalConDto(double montoTotalConDto) {
 		this.montoTotalConDto = montoTotalConDto;
 		super.setCosto(montoTotalConDto);
+	}
+
+
+	public double getMontoTotalSinDto() {
+		return montoTotalSinDto;
 	}
 
 
