@@ -27,7 +27,7 @@ public class Atraccion extends Sugerencia {
 
 	@Override
 	public String toString() {
-		return "Atraccion ( " + super.getNombre() + ", Precio : " + super.getCosto() + ", Duracion : " + super.getTiempoRequerido()+ ", Cupos Restantes: " + cupoActual
+		return "Atraccion ( " + super.getNombre() + ", Precio : " + super.getCosto() + ", Duracion : " + super.getTiempoRequerido()+ ", Cupos Restantes: " + (cupoMaximo-cupoActual)
 				+ ", Tipo : " + super.getTipo() + ") ";
 	}
 
