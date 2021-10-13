@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class SecretariaTurismo {
 	private static List<Usuario>    usuarios 	= new LinkedList<Usuario>();
@@ -65,17 +66,18 @@ public class SecretariaTurismo {
 					case "n":
 						mensaje =  "##################################################################################\n"
 								 + "##            Sugerencia no aceptada. Pasando a la siguiente opcion...          ##\n"
-								 + "##################################################################################";;
+								 + "##################################################################################";
 						break;
 					
 					case "q":
 						mensaje =  "##################################################################################\n"
 								 + "##                         Usted ha salido. Hasta luego!                        ##\n"
-								 + "##################################################################################";;
+								 + "##################################################################################";
 						break;
 				}
 				
 				System.out.println(mensaje);
+				TimeUnit.SECONDS.sleep(2); // Pausa para que se lean bien los mensajes del programa
 				System.out.println("-----------------------------------------------------------------------------------");
 			
 			} while(itr.hasNext() && !opcion.equalsIgnoreCase("q"));
