@@ -8,7 +8,6 @@ public class PromocionAxB extends Promocion {
 
 	public PromocionAxB(TipoAtraccion tipoPromocion, String nombrePromocion,
 			List<Atraccion> atraccionesContenidas, List<Atraccion> atraccionesGratis) {
-		
 		super(tipoPromocion, nombrePromocion, atraccionesContenidas);
 		this.atraccionesGratis = atraccionesGratis;
 		
@@ -17,19 +16,14 @@ public class PromocionAxB extends Promocion {
 	
 	@Override
 	public void calcularCostoPromocion() {
-		double montoTotal = 0;
 		double montoNetoDescuento = 0;
 		double precioConDescuento = 0;
-		
-		for(Atraccion atraccion : atraccionesContenidas) {
-			montoTotal += atraccion.getCosto(); //sumo el costo total sin dto.
-		}
 		
 		for(Atraccion atraccion : atraccionesGratis) {
 			montoNetoDescuento += atraccion.getCosto(); //monto a descontar
 		}
 		
-		precioConDescuento = montoTotal - montoNetoDescuento;
+		precioConDescuento = super.montoTotalSinDto - montoNetoDescuento;
 		
 		setMontoDescuento(montoNetoDescuento);
 		setMontoTotalConDto(precioConDescuento);
